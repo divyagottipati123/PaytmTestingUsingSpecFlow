@@ -3,6 +3,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.PageObjects;
 using PaytmScenariosTestningUsingSpecFlow.ComponentHElper;
+using PaytmScenariosTestningUsingSpecFlow.DataDriven;
 using PaytmScenariosTestningUsingSpecFlow.Settings;
 using System;
 using System.Collections.Generic;
@@ -15,14 +16,14 @@ namespace PaytmScenariosTestningUsingSpecFlow
     
     public class PaytmHomePage
     {
-        //private TestContext _testcontext;
-
-        //public TestContext TestContext
-        //{
-        //    get { return _testcontext; }
-        //    set { _testcontext = value; }
-        //}
-        // [DataSource("System.Data.Odbc", @"Dsn=Excel Files; dbq=C:\Users\ee210668\Desktop\Data.xlsx;", "Details$", DataAccessMethod.Sequential)]
+        private TestContext _testcontext;
+        string xlpath = @"C:\Users\ee210668\Desktop\Data.xlsx";
+        public TestContext TestContext
+        {
+            get { return _testcontext; }
+            set { _testcontext = value; }
+        }
+     
         #region Webelements
         [FindsBy(How = How.XPath, Using = Webelement.Mobile)]
         private IWebElement Mobile;
@@ -71,13 +72,17 @@ namespace PaytmScenariosTestningUsingSpecFlow
         {
             Mobilelink.Click();
         }
-       
+       // [DataSource("System.Data.Odbc", @"Dsn=Excel Files; dbq= ;", "Details$", DataAccessMethod.Sequential)]
         public void EnterMobilenumandAmount()
         {
-            MobileNum.SendKeys(Test.MobileNum);
-            Amount.SendKeys(Test.Amount);
-          // MobileNum.SendKeys(TestContext.DataRow["MobileNumber"].ToString());
-           //Amount.SendKeys(TestContext.DataRow["Amount"].ToString());
+            //MobileNum.SendKeys(Test.MobileNum);
+            //Amount.SendKeys(Test.Amount);
+
+            //MobileNum.SendKeys(TestContext.DataRow["MobileNumber"].ToString());
+            //Amount.SendKeys(TestContext.DataRow["Amount"].ToString());
+            MobileNum.SendKeys(ExcelPackage.GetCellData(xlpath, "Details", 1, 0).ToString());
+            Amount.SendKeys(ExcelPackage.GetCellData(xlpath, "Details", 1, 1).ToString());
+
         }
         public void Proceedtorecharge()
         {

@@ -5,9 +5,12 @@ using TechTalk.SpecFlow;
 namespace PaytmScenariosTestningUsingSpecFlow
 {
     [Binding]
+    // [DataSource("System.Data.Odbc", @"Dsn=Excel Files; dbq=C:\Users\ee210668\Desktop\Data.xlsx;", "Details$", DataAccessMethod.Sequential)]
     public class PaytmSteps
     {
         PaytmHomePage pom = new PaytmHomePage();
+       
+      
         [Given(@"I am at the Paytm Home Page")]
         public void GivenIAmAtThePaytmHomePage()
         {
@@ -49,6 +52,7 @@ namespace PaytmScenariosTestningUsingSpecFlow
         }
         
         [Given(@"I have Entered (.*) and (.*)")]
+       
         public void GivenIHaveEnteredAnd(string p0, string p1)
         {
             pom.EnterMobilenumandAmount();
